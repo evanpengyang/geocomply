@@ -1,0 +1,4 @@
+vendor_id,vendor_name,check_type,regions_covered,cost_per_check_usd,p50_latency_ms,notes
+V01,Northstar Registry,identity_registry,US-NJ;US-PA,0.12,420,Broad coverage
+V02,CivicMatch,identity_registry,US-NJ;US-PA,0.07,690,Cheapest registry
+V06,SanctionScan,sanctions_pep,US-NJ;US-PA,0.04,210,Required screening

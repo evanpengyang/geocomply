@@ -1,0 +1,2 @@
+week_starting,customer,region,session_started,data_submitted,passed_on_data,stepped_up_to_doc,doc_uploaded,doc_passed,verification_passed,manual_review_queued,pass_rate_pct
+2026-02-02,Example Play,US-NJ,100,90,55,35,30,25,80,4,80.00

@@ -1,0 +1,5 @@
+week_starting,customer,region,cohort,step_no,vendor_id,checks_sent,matched,no_match,timeout,cost_usd
+2026-02-02,Example Play,US-NJ,waterfall,0,V06,100,5,95,0,4.00
+2026-02-02,Example Play,US-NJ,calibration,,V01,10,7,3,0,1.20
+2026-02-02,Example Play,US-NJ,calibration,,V02,10,8,2,0,0.70
+2026-02-02,Example Play,US-NJ,calibration,,ANY_REGISTRY,10,9,1,0,0.00
