@@ -6,3 +6,4 @@ data/*.sqlite
 data/*.json
 data/raw/
 frontend/dist/
+frontend/node_modules/
