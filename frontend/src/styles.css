@@ -187,6 +187,8 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 .decision-summary p { max-width: 900px; color: #dbe3ff; font-size: .96rem; }
 .decision-summary p:last-child { display: none; }
 .decision-summary p:not(:last-child), .price-threshold p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.number-pill { display: inline-flex; align-items: center; margin: 0 2px; padding: 2px 7px; border-radius: 999px; font-family: inherit; font-size: .88em; font-weight: 850; line-height: 1.35; white-space: nowrap; }
+.decision-summary .number-pill { color: #0a003c; background: #ffb18a; }
 
 .price-threshold { position: relative; margin-top: 26px; padding: 27px 30px 25px; border: 1px solid #ffbd9d; border-radius: 16px; background: #fff; box-shadow: 0 12px 26px #ff762f18; }
 .price-threshold::before { display: block; margin-bottom: 10px; color: #bd4e1f; content: "WHEN WOULD THIS RECOMMENDATION CHANGE?"; font-size: .7rem; font-weight: 850; letter-spacing: .11em; }
@@ -194,6 +196,7 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 .price-threshold p { max-width: 900px; color: #26365e; font-size: 1rem; line-height: 1.55; }
 .price-threshold small { color: #596984; }
 .price-threshold small { display: none; }
+.price-threshold .number-pill { color: #8d3d1d; background: #ffe1d0; }
 
 @media (max-width: 800px) {
   .opportunities-section, .comparison-section, .business-section { padding-inline: 20px; }
