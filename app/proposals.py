@@ -264,6 +264,13 @@ def printable_proposal_html(proposal: dict[str, Any]) -> str:
         decision = comparison["decision_summary"]
         pair_cost_reduction = model.get("pair_cost_reduction_pct")
         pair_cost_reduction_display = "Not available" if pair_cost_reduction is None else f"{pair_cost_reduction}%"
+        threshold = comparison.get("price_threshold")
+        threshold_section = (
+            '<section class="keep"><h2>' + html.escape(threshold['headline']) +
+            ' <span class="tag">Modeled</span></h2><p>' + html.escape(threshold['detail']) +
+            '</p><p>' + html.escape(threshold['assumption']) + '</p><p>' +
+            html.escape(threshold['formula']) + '</p></section>'
+        ) if threshold else ""
         comparison_section = f"""
 <section class="keep"><h2>Configuration comparison <span class="tag">Modeled</span></h2>
 <p><b>Current:</b> {html.escape(current_pair)}<br><b>Proposed:</b> {html.escape(proposed_pair)}</p>
@@ -278,6 +285,7 @@ def printable_proposal_html(proposal: dict[str, Any]) -> str:
 {_weekly_chart_svg(weekly['weeks'])}
 </section>
 <section class="card keep"><h2>Decision summary <span class="tag">Modeled</span></h2><p><b>{html.escape(decision['headline'])}</b></p><p>{html.escape(decision['detail'])}</p><p>{html.escape(decision['limitation'])}</p></section>
+{threshold_section}
 <section class="keep"><h2>Pilot economics <span class="tag">Assumed inputs + modeled result</span></h2><ul>
 <li>Eligible verification volume: {html.escape(str(proposal['assumptions']['projected_eligible_entrants']))} ({html.escape(str(proposal['assumptions'].get('volume_mode', 'custom')))} scenario)</li>
 <li>One-time implementation cost: {html.escape(str(proposal['assumptions']['implementation_cost_usd']))} USD</li>
