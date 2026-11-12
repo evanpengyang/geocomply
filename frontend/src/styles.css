@@ -130,10 +130,14 @@ nav button:last-child::after { content: "Feature adoption example"; }
 
 /* Wide, editorial workspace: use boundaries and rhythm rather than a stack of cards. */
 :root { background: #fff; }
-main { max-width: none; width: 100%; margin: 0; padding: 0 clamp(24px, 5vw, 88px) 88px; }
-.app-header { margin-inline: 0; padding: 46px clamp(24px, 5vw, 88px); border-radius: 0; box-shadow: none; }
-.scope-once { margin: 24px 0 12px; }
-.step-card, .feature-case { margin: 0; padding: 42px 0; border: 0; border-bottom: 1px solid #dfe4ee; border-radius: 0; background: transparent; box-shadow: none; }
+body { background: #fff; }
+main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
+.app-header { min-height: 360px; margin: 0; padding: 52px clamp(28px, 6vw, 120px); border-radius: 0; background: radial-gradient(circle at 92% 4%, #4169e1 0, #2138a8 28%, #0a003c 67%); box-shadow: none; }
+.app-header h1::after { display: block; max-width: 760px; }
+.scope-once, .error, .step-card, .feature-case { margin-inline: clamp(28px, 6vw, 120px); }
+.scope-once { margin-top: 26px; margin-bottom: 12px; }
+.error { margin-top: 18px; margin-bottom: 0; }
+.step-card, .feature-case { margin-top: 0; margin-bottom: 0; padding: 42px 0; border: 0; border-bottom: 1px solid #dfe4ee; border-radius: 0; background: transparent; box-shadow: none; }
 .step-card:hover, .feature-case:hover { border-color: #dfe4ee; }
 .step-card::before { top: 0; left: 0; width: 42px; height: 3px; }
 .pilot { border-bottom-color: #ffd0bb; background: transparent; }
@@ -153,10 +157,12 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 clamp(24px, 5vw, 88px
 .adoption-scenarios article:last-child { border-right: 0; }
 .adoption-scenarios .active-scenario { border-color: #dfe4ee; box-shadow: inset 4px 0 #ff762f; background: #fff7f2; }
 .feature-case { max-width: none; }
+.step-heading { grid-template-columns: minmax(280px, 420px) 1fr; gap: 8px 28px; }
 
 @media (max-width: 800px) {
-  main { padding: 0 20px 58px; }
-  .app-header { margin-inline: 0; padding: 32px 20px; border-radius: 0; }
+  main { padding: 0 0 58px; }
+  .app-header { min-height: 0; margin-inline: 0; padding: 32px 20px; border-radius: 0; }
+  .scope-once, .error, .step-card, .feature-case { margin-inline: 20px; }
   .step-card, .feature-case { padding: 30px 0; border-radius: 0; }
   .comparison-grid, .pilot-results, .per-thousand, .adoption-scenarios { border-top: 1px solid #dfe4ee; }
   .comparison-grid article, .pilot-results article, .per-thousand article, .adoption-scenarios article { min-height: 0; padding: 18px 0; border-right: 0; border-bottom: 1px solid #dfe4ee; }
