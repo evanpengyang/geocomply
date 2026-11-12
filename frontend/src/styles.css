@@ -75,7 +75,11 @@ input:focus, select:focus { border-color: #0041ed; box-shadow: 0 0 0 4px #0041ed
 .vendor-comparison th { color: #344439; font-weight: 750; }
 .vendor-comparison thead th { background: #f5f8f1; }
 .vendor-comparison th small { display: block; margin-top: 2px; color: #748174; font-weight: 520; }
-.info { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; color: #0a003c; background: #dbe2ff; font-size: .7rem; cursor: help; }
+.info-tip { position: relative; display: inline-grid; place-items: center; width: 16px; height: 16px; margin-left: 4px; border-radius: 50%; color: #0a003c; background: #dbe2ff; font-size: .7rem; cursor: help; vertical-align: text-bottom; outline: none; }
+.info-tip:focus-visible { box-shadow: 0 0 0 3px #0041ed44; }
+.tooltip { position: absolute; z-index: 10; left: 0; bottom: calc(100% + 9px); width: 240px; padding: 10px 12px; border-radius: 9px; color: #fff; background: #0a003c; box-shadow: 0 8px 22px #0a003c33; font-size: .77rem; font-weight: 500; line-height: 1.4; opacity: 0; pointer-events: none; transform: translate(0, 4px); transition: opacity .15s ease, transform .15s ease; }
+.tooltip::after { position: absolute; top: 100%; left: 12px; width: 8px; height: 8px; background: #0a003c; content: ""; transform: translate(-50%, -4px) rotate(45deg); }
+.info-tip:hover .tooltip, .info-tip:focus .tooltip { opacity: 1; transform: translate(0, 0); }
 .per-thousand { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
 .per-thousand article { padding: 16px; border: 1px solid #e4eadf; border-radius: 14px; background: #fafcf8; }
 .per-thousand span { display: block; color: #6b796d; font-size: .73rem; font-weight: 650; }.per-thousand strong { display: block; margin-top: 7px; font-size: 1.18rem; letter-spacing: -.04em; }
