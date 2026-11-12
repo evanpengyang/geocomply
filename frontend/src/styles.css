@@ -186,7 +186,7 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 .decision-summary h3 { color: #fff; font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -.045em; }
 .decision-summary p { max-width: 900px; color: #dbe3ff; font-size: .96rem; }
 .decision-summary p:last-child { display: none; }
-.decision-summary p:not(:last-child), .price-threshold p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.price-threshold p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .number-pill { display: inline-flex; align-items: center; margin: 0 2px; padding: 2px 7px; border-radius: 999px; font-family: inherit; font-size: .88em; font-weight: 850; line-height: 1.35; white-space: nowrap; }
 .decision-summary .number-pill { color: #0a003c; background: #ffb18a; }
 
