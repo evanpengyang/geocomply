@@ -267,8 +267,8 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 .business-section > * { position: relative; z-index: 1; }
 .business-section > h2 { display: flex; align-items: center; gap: 12px; }
 .business-section > h2::after { height: 1px; flex: 1; background: #f0cdbb; content: ""; }
-.volume-mode { flex-wrap: wrap; gap: 0; margin: 26px 0 0; }
-.volume-mode::before { width: 100%; margin-bottom: 9px; color: #9b5433; content: "SCENARIO BASIS"; font-size: .7rem; font-weight: 850; letter-spacing: .12em; }
+.volume-mode { display: grid; grid-template-columns: repeat(2, minmax(180px, max-content)); align-items: stretch; gap: 0; margin: 32px 0 0; }
+.volume-mode::before { display: block; grid-column: 1 / -1; margin-bottom: 10px; color: #9b5433; content: "SCENARIO BASIS"; font-size: .7rem; font-weight: 850; letter-spacing: .12em; line-height: 1.2; }
 .volume-mode button { min-width: 180px; border: 1px solid #f2cdbb; border-radius: 0; color: #6b4d3f; background: #fff; box-shadow: none; white-space: normal; }
 .volume-mode button:first-of-type { border-radius: 11px 0 0 11px; }
 .volume-mode button:last-of-type { margin-left: -1px; border-radius: 0 11px 11px 0; }
@@ -295,7 +295,8 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 
 @media (max-width: 800px) {
   .business-section::after { display: none; }
-  .volume-mode button { min-width: 0; flex: 1; padding-inline: 10px; }
+  .volume-mode { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .volume-mode button { min-width: 0; padding-inline: 10px; }
   .pilot-inputs, .pilot-results { grid-template-columns: 1fr; }
   .pilot-results article { min-height: 0; }
 }
