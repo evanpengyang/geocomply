@@ -306,6 +306,7 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
 .landing-page::after { position: absolute; right: clamp(-210px, -9vw, -90px); bottom: clamp(-250px, -13vw, -120px); width: min(48vw, 680px); aspect-ratio: 1; border: clamp(42px, 5vw, 74px) solid #ff762f; border-radius: 50%; content: ""; opacity: .95; }
 .landing-brand, .topbar-brand { display: inline-flex; align-items: center; gap: 11px; font-size: 1.1rem; letter-spacing: -.035em; }
 .product-logo { display: inline-block; width: 29px; height: 29px; background: url("./assets/idcomply.svg") center / contain no-repeat; }
+.geocomply-wordmark { display: block; width: 154px; height: auto; object-fit: contain; }
 .landing-hero { z-index: 1; align-self: center; max-width: 860px; padding: 58px 0 84px; }
 .landing-hero > p { margin-bottom: 18px; color: #ff9a68; font-size: .72rem; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
 .landing-hero h1 { max-width: 900px; margin-bottom: 24px; color: #fff; font-size: clamp(3.4rem, 7.3vw, 7.4rem); line-height: .86; letter-spacing: -.09em; }
@@ -336,5 +337,6 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
   .topbar { min-height: 62px; padding-inline: 20px; }
   .topbar-brand b { font-size: .86rem; }
   .topbar-brand small { font-size: .61rem; }
+  .geocomply-wordmark { width: 118px; }
   .workspace-shell .scope-once { margin-inline: 20px; }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import geocomplyLogo from "./assets/geocomply-logo.png";
 import "./styles.css";
 
 const API = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
@@ -72,11 +73,11 @@ function App() {
   };
   return <main className={screen === "landing" ? "landing-shell" : "workspace-shell"}>
     {screen === "landing" ? <section className="landing-page" aria-labelledby="landing-title">
-      <div className="landing-brand"><i className="product-logo" /><b>IDComply</b></div>
+      <div className="landing-brand"><img className="geocomply-wordmark" src={geocomplyLogo} alt="GeoComply" /><b>· IDComply</b></div>
       <div className="landing-hero"><p>Decision workbench</p><h1 id="landing-title">IDComply<br />Waterfall Pricing</h1><span>Compare eligible registry-vendor orders, review the evidence, and build a clear pilot case.</span><button className="landing-cta" onClick={() => setScreen("workspace")}>Open workbench <b>→</b></button></div>
       <div className="landing-outline" aria-label="What the workbench includes"><span><b>01</b> Choose an opportunity</span><span><b>02</b> Review the comparison</span><span><b>03</b> Evaluate the business case</span></div>
     </section> : <>
-    <header className="topbar"><div className="topbar-brand"><i className="product-logo" /><span><b>IDComply Waterfall Pricing</b><small>Decision workbench</small></span></div><button className="topbar-overview" onClick={() => setScreen("landing")}>Overview</button></header>
+    <header className="topbar"><div className="topbar-brand"><img className="geocomply-wordmark" src={geocomplyLogo} alt="GeoComply" /><span><b>IDComply Waterfall Pricing</b><small>Decision workbench</small></span></div><button className="topbar-overview" onClick={() => setScreen("landing")}>Overview</button></header>
     <p className="scope-once">Compares the first two eligible registry vendors. Other steps stay unchanged.</p>{error && <p className="error">{error}</p>}
     <nav className="workspace-guide" aria-label="Decision workflow"><button className={activeArea === "opportunities" ? "guide-active" : ""} onClick={() => setActiveArea("opportunities")}><b>01</b><span>Choose opportunity<small>Select a customer and proposed pair.</small></span></button><button className={activeArea === "comparison" ? "guide-active" : ""} onClick={() => setActiveArea("comparison")}><b>02</b><span>Review comparison<small>See the evidence and recommendation.</small></span></button><button className={activeArea === "business" ? "guide-active" : ""} onClick={() => setActiveArea("business")}><b>03</b><span>Evaluate business case<small>Set volume, cost, and export.</small></span></button></nav>
       <section className="step-card opportunities-section" hidden={activeArea !== "opportunities"}><div className="step-heading"><h2>Opportunities</h2><label>Customer<select value={customer} onChange={event => choose(event.target.value)}>{customers.map(item => <option key={item.customer}>{item.customer}</option>)}</select></label><p className="scope">Source period: {from} to {to}</p></div><div className="opportunity-table"><div className="opportunity-row table-label"><span>Customer</span><span>Current / proposed</span><span>Savings / 1k</span><span>Consistency</span><span>Result</span></div>{ranked.map(item => <button className={`opportunity-row ${customer === item.customer ? "selected" : ""}`} key={item.customer} onClick={() => choose(item.customer, item.scope)}><span><b>{item.customer}</b><small>{item.calibration_sample_size == null ? "—" : formatNumber(item.calibration_sample_size)} calibration entrants</small></span><span>{item.current_pair ? <><b>Current: {item.current_pair}</b><small>Proposed: {item.proposed_pair}</small></> : item.reason}</span><span>{outcome(item.modeled_savings_per_1000_eligible_entrants_usd)}</span><span>{item.comparable_week_count ? `${formatNumber(item.proposed_order_cheaper_week_count ?? 0)}/${formatNumber(item.comparable_week_count)} weeks` : "—"}</span><span>{item.result}</span></button>)}</div></section>
