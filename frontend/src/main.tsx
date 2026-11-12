@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -28,6 +28,7 @@ function App() {
   const [comparison, setComparison] = useState<Comparison | null>(null); const [loading, setLoading] = useState(false);
   const [activeArea, setActiveArea] = useState<"opportunities" | "comparison" | "business">("opportunities");
   const [error, setError] = useState(""); const [exports, setExports] = useState<ExportLinks | null>(null);
+  const hasNavigated = useRef(false);
   useEffect(() => {
     Promise.all([fetch(`${API}/customers`).then(r => r.json()), fetch(`${API}/opportunities`).then(r => r.json())]).then(([customerData, opportunityData]) => {
       setCustomers(customerData.customers); setOpportunities(opportunityData.opportunities);
@@ -48,6 +49,11 @@ function App() {
     }, 180);
     return () => window.clearTimeout(timer);
   }, [customer, from, to, volume, implementationCost, volumeMode]);
+  useEffect(() => {
+    if (!hasNavigated.current) { hasNavigated.current = true; return; }
+    const frame = window.requestAnimationFrame(() => document.querySelector<HTMLElement>(".workspace-guide")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeArea]);
   const ranked = useMemo(() => [...opportunities].sort((a, b) => Number(b.modeled_savings_per_1000_eligible_entrants_usd ?? -Infinity) - Number(a.modeled_savings_per_1000_eligible_entrants_usd ?? -Infinity)), [opportunities]);
   const pilot = comparison?.pilot_economics;
   const choose = (name: string, scope?: { from: string; to: string }) => { const selected = customers.find(item => item.customer === name); setCustomer(name); setFrom(scope?.from ?? selected?.available_from ?? ""); setTo(scope?.to ?? selected?.available_to ?? ""); setVolumeMode("recorded"); setExports(null); setActiveArea("comparison"); };
