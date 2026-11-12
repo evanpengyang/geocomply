@@ -214,3 +214,43 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
   .workspace-guide { grid-template-columns: 1fr; margin: 16px 20px 0; }
   .workspace-guide button, .workspace-guide button:first-child, .workspace-guide button:last-child { min-height: 64px; }
 }
+
+/* Vendor comparison: a focused dashboard rather than a flat report. */
+.comparison-section { position: relative; overflow: hidden; }
+.comparison-section::after { position: absolute; z-index: 0; top: -155px; right: -120px; width: 360px; height: 360px; border: 56px solid #dce4ff; border-radius: 50%; content: ""; opacity: .8; pointer-events: none; }
+.comparison-section > * { position: relative; z-index: 1; }
+.comparison-section > h2 { display: flex; align-items: center; gap: 12px; }
+.comparison-section > h2::after { height: 1px; flex: 1; background: #cbd6f6; content: ""; }
+.comparison-grid { position: relative; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 26px 0 18px; border: 0; }
+.comparison-grid::before { position: absolute; z-index: 2; top: 70px; left: 50%; display: grid; width: 38px; height: 38px; place-items: center; border: 4px solid #f2f5ff; border-radius: 50%; color: #fff; background: #ff762f; content: "↔"; font-size: 1.15rem; font-weight: 800; transform: translateX(-50%); }
+.comparison-grid article { position: relative; min-height: 150px; padding: 26px 28px; border: 1px solid #d1dbf7; border-right: 1px solid #d1dbf7; border-radius: 18px; background: #fff; box-shadow: 0 10px 24px #0a003c0c; }
+.comparison-grid article:first-child::before, .comparison-grid article.proposed::before { display: block; margin-bottom: 12px; color: #687899; content: "RECORDED ORDER"; font-size: .67rem; font-weight: 850; letter-spacing: .12em; }
+.comparison-grid article.proposed { color: #fff; border-color: #0041ed; background: linear-gradient(135deg, #0750f8, #1534a2); box-shadow: 0 14px 30px #0041ed35; }
+.comparison-grid article.proposed::before { color: #bfcfff; content: "MODELED ALTERNATIVE"; }
+.comparison-grid article.proposed span, .comparison-grid article.proposed small { color: #d9e2ff; }
+.comparison-grid article:nth-child(3) { display: grid; min-height: 0; grid-column: 1 / -1; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; padding: 17px 22px; border-color: #cdd8f7; border-left: 5px solid #ff762f; border-radius: 12px; background: #e8edff; box-shadow: none; }
+.comparison-grid article:nth-child(3) span { grid-row: 1 / span 2; color: #4e5f88; }
+.comparison-grid article:nth-child(3) strong { margin: 0; color: #0a003c; font-size: 1.35rem; }
+.comparison-grid article:nth-child(3) small { grid-column: 2; }
+.vendor-table-wrap { margin-top: 24px; border: 1px solid #cfd9f6; border-radius: 16px; background: #fff; box-shadow: 0 10px 22px #0a003c0a; }
+.vendor-table thead th { padding-top: 16px; padding-bottom: 16px; color: #41557e; background: #e9eeff; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.vendor-table tbody tr { transition: background .15s ease; }
+.vendor-table tbody tr:hover { background: #f5f7ff; }
+.vendor-table tbody th { color: #172451; font-weight: 760; }
+.per-thousand { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 26px; border: 0; }
+.per-thousand::before { grid-column: 1 / -1; color: #536791; content: "MODELED PAIR ECONOMICS"; font-size: .7rem; font-weight: 850; letter-spacing: .12em; }
+.per-thousand article { min-height: 118px; padding: 20px 22px; border: 1px solid #cfd9f6; border-top: 4px solid #8097ed; border-right: 1px solid #cfd9f6; border-radius: 14px; background: #fff; box-shadow: 0 8px 18px #0a003c0a; }
+.per-thousand article:nth-child(3) { border-top-color: #ff762f; background: #fff8f4; }
+.per-thousand article strong { color: #0a003c; font-size: clamp(1.35rem, 2vw, 1.85rem); }
+.comparison-section .advanced { padding: 16px 18px; border: 1px solid #cfd9f6; border-radius: 12px; background: #fff; }
+.comparison-section .weekly-list { grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); }
+
+@media (max-width: 800px) {
+  .comparison-section::after, .comparison-grid::before { display: none; }
+  .comparison-grid { grid-template-columns: 1fr; }
+  .comparison-grid article { min-height: 0; padding: 22px; }
+  .comparison-grid article:nth-child(3) { grid-column: auto; grid-template-columns: 1fr; }
+  .comparison-grid article:nth-child(3) span { grid-row: auto; }
+  .comparison-grid article:nth-child(3) small { grid-column: auto; }
+  .per-thousand { grid-template-columns: 1fr; gap: 10px; }
+}
