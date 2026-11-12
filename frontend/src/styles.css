@@ -196,3 +196,21 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
   .opportunities-section, .comparison-section, .business-section { padding-inline: 20px; }
   .decision-summary, .price-threshold { padding: 22px 20px; border-radius: 0 12px 12px 0; }
 }
+
+/* Progressive disclosure keeps the workbench focused on one decision area at a time. */
+.workspace-guide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 22px clamp(28px, 6vw, 120px) 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.workspace-guide button, .workspace-guide button:first-child, .workspace-guide button:last-child { display: flex; min-height: 80px; gap: 13px; padding: 14px 16px; border: 1px solid #d9e0f0; border-radius: 12px; color: #354467; background: #fff; box-shadow: none; font-size: inherit; font-weight: 700; text-align: left; transform: none; }
+.workspace-guide button::after { content: none !important; }
+.workspace-guide button:hover:not(:disabled) { border-color: #9baef0; background: #f6f8ff; transform: none; }
+.workspace-guide button b { display: grid; flex: 0 0 30px; width: 30px; height: 30px; place-items: center; border-radius: 50%; color: #2949be; background: #e9eeff; font-size: .75rem; }
+.workspace-guide button span { display: grid; gap: 3px; color: #0a003c; font-size: .9rem; }
+.workspace-guide button small { color: #6c7894; font-size: .74rem; font-weight: 500; line-height: 1.35; }
+.workspace-guide .guide-active { border-color: #ff762f; color: #0a003c; background: #fff7f2; box-shadow: inset 3px 0 #ff762f; }
+.workspace-guide .guide-active b { color: #0a003c; background: #ff762f; }
+.continue-button { display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; padding: 0 20px; color: #fff; background: #0041ed; box-shadow: 0 8px 20px #0041ed2b; }
+.continue-button span { font-size: 1.25rem; line-height: 1; }
+
+@media (max-width: 800px) {
+  .workspace-guide { grid-template-columns: 1fr; margin: 16px 20px 0; }
+  .workspace-guide button, .workspace-guide button:first-child, .workspace-guide button:last-child { min-height: 64px; }
+}
