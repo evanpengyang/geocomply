@@ -48,6 +48,8 @@ class PairComparisonTests(unittest.TestCase):
     def test_hand_calculated_pair_cost_and_projection(self) -> None:
         result = compare_first_two_registries(self.database, "Example Play", "2026-02-02", "2026-02-02", 1000, 20)
         self.assertEqual(result["status"], "available")
+        self.assertEqual(result["price_threshold"]["vendor_name"], "CivicMatch")
+        self.assertIn("0.137", result["price_threshold"]["detail"])
         self.assertEqual([item["vendor_id"] for item in result["current_order"]], ["V01", "V02"])
         self.assertEqual(result["calibration"]["sample_size"], 100)
         self.assertEqual(result["model"]["current_order_cost_for_calibration_usd"], "14.10")
@@ -86,6 +88,7 @@ class PairComparisonTests(unittest.TestCase):
         connection.close()
         result = compare_first_two_registries(self.database, "Example Play", "2026-02-02", "2026-02-02", 1000)
         self.assertEqual(result["status"], "unavailable")
+        self.assertNotIn("price_threshold", result)
         self.assertEqual(result["reason_code"], "calibration_sample_count_mismatch")
 
     def test_zero_calibration_sample_disables_comparison(self) -> None:

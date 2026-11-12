@@ -119,3 +119,7 @@ nav button:last-child::after { content: "Feature adoption example"; }
 .decision-summary h3 { margin: 0 0 8px; color: #0a003c; }.decision-summary p { margin: 7px 0; color: #52607a; }.weekly-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(124px, 1fr)); gap: 8px; margin-top: 12px; }.weekly-list span { padding: 9px; border: 1px solid #e3e8f4; border-radius: 9px; background: #fff; color: #52607a; font-size: .8rem; }.weekly-list b { display: block; color: #0a003c; margin-top: 3px; }
 
 @media (max-width: 800px) { main { padding: 16px 16px 58px; }.app-header { display: block; padding: 32px 24px; border-radius: 20px; }.app-header nav { margin-top: 24px; }.workflow-intro { overflow: auto; }.workflow-intro span { white-space: nowrap; }.step-card, .feature-case { padding: 21px; border-radius: 18px; }.step-heading, .comparison-grid, .per-thousand, .pilot-inputs, .pilot-results, .feature-controls, .adoption-scenarios { grid-template-columns: 1fr; }.weekly-chart-wrap { grid-template-columns: 20px 500px; overflow-x: auto; }.vendor-comparison table { font-size: .78rem; } }
+
+.price-threshold { margin-top: 20px; padding-top: 16px; border-top: 1px solid #dedce5; }
+.price-threshold h3 { margin: 0 0 8px; }
+.price-threshold small { display: block; color: #52607a; line-height: 1.5; }

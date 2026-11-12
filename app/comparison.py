@@ -16,6 +16,7 @@ from typing import Any
 
 from .baseline import _decimal_string, _money
 from .database import connect, initialize
+from .price_threshold import price_threshold
 
 
 RATE_QUANTUM = Decimal("0.0001")
@@ -401,5 +402,7 @@ def compare_first_two_registries(
         },
         "pilot_economics": pilot_economics,
         "decision_summary": decision_summary,
+        "price_threshold": price_threshold(vendor_a["vendor_name"], vendor_b["vendor_name"],
+                                           matches_a, matches_b, price_a, price_b),
         "assumptions": ASSUMPTIONS,
     }
