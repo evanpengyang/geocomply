@@ -168,3 +168,31 @@ main { max-width: none; width: 100%; margin: 0; padding: 0 0 88px; }
   .comparison-grid article, .pilot-results article, .per-thousand article, .adoption-scenarios article { min-height: 0; padding: 18px 0; border-right: 0; border-bottom: 1px solid #dfe4ee; }
   .comparison-grid article:last-child, .pilot-results article:last-child, .per-thousand article:last-child, .adoption-scenarios article:last-child { border-bottom: 0; }
 }
+
+/* Distinct decision moments: each part of the workflow has its own visual role. */
+.opportunities-section, .comparison-section, .business-section { margin-inline: 0; padding-inline: clamp(28px, 6vw, 120px); }
+.opportunities-section { background: #ffffff; }
+.comparison-section { background: #f2f5ff; border-bottom-color: #d7def7; }
+.business-section { background: linear-gradient(108deg, #fff 0%, #fff7f2 100%); border-bottom-color: #ffd9c7; }
+.comparison-section .vendor-table-wrap, .comparison-section .opportunity-table { background: #fff; border-color: #cfd9f6; }
+.comparison-section .comparison-grid, .comparison-section .per-thousand { border-color: #cfd9f6; }
+.comparison-section .comparison-grid article, .comparison-section .per-thousand article { border-right-color: #cfd9f6; }
+.comparison-section .weekly-list span { border-color: #d4dcf7; background: #fff; }
+.business-section .pilot-results { border-color: #ffd7c4; }
+.business-section .pilot-results article { border-right-color: #ffd7c4; }
+
+.decision-summary { position: relative; margin-top: 32px; padding: 28px 32px 26px; border: 0; border-left: 6px solid #ff762f; border-radius: 0 16px 16px 0; color: #fff; background: linear-gradient(118deg, #0a003c, #17328f); box-shadow: 0 16px 34px #0a003c26; }
+.decision-summary::before { display: block; margin-bottom: 10px; color: #ff9a68; content: "RECOMMENDATION"; font-size: .7rem; font-weight: 850; letter-spacing: .14em; }
+.decision-summary h3 { color: #fff; font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -.045em; }
+.decision-summary p { max-width: 900px; color: #dbe3ff; font-size: .96rem; }
+
+.price-threshold { position: relative; margin-top: 26px; padding: 27px 30px 25px; border: 1px solid #ffbd9d; border-radius: 16px; background: #fff; box-shadow: 0 12px 26px #ff762f18; }
+.price-threshold::before { display: block; margin-bottom: 10px; color: #bd4e1f; content: "WHEN WOULD THIS RECOMMENDATION CHANGE?"; font-size: .7rem; font-weight: 850; letter-spacing: .11em; }
+.price-threshold h3 { margin-bottom: 10px; color: #0a003c; font-size: clamp(1.3rem, 2.2vw, 1.8rem); }
+.price-threshold p { max-width: 900px; color: #26365e; font-size: 1rem; line-height: 1.55; }
+.price-threshold small { color: #596984; }
+
+@media (max-width: 800px) {
+  .opportunities-section, .comparison-section, .business-section { padding-inline: 20px; }
+  .decision-summary, .price-threshold { padding: 22px 20px; border-radius: 0 12px 12px 0; }
+}
