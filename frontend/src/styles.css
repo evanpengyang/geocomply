@@ -127,3 +127,38 @@ nav button:last-child::after { content: "Feature adoption example"; }
 .price-threshold { margin-top: 20px; padding-top: 16px; border-top: 1px solid #dedce5; }
 .price-threshold h3 { margin: 0 0 8px; }
 .price-threshold small { display: block; color: #52607a; line-height: 1.5; }
+
+/* Wide, editorial workspace: use boundaries and rhythm rather than a stack of cards. */
+:root { background: #fff; }
+main { max-width: none; width: 100%; margin: 0; padding: 0 clamp(24px, 5vw, 88px) 88px; }
+.app-header { margin-inline: 0; padding: 46px clamp(24px, 5vw, 88px); border-radius: 0; box-shadow: none; }
+.scope-once { margin: 24px 0 12px; }
+.step-card, .feature-case { margin: 0; padding: 42px 0; border: 0; border-bottom: 1px solid #dfe4ee; border-radius: 0; background: transparent; box-shadow: none; }
+.step-card:hover, .feature-case:hover { border-color: #dfe4ee; }
+.step-card::before { top: 0; left: 0; width: 42px; height: 3px; }
+.pilot { border-bottom-color: #ffd0bb; background: transparent; }
+.pilot::before { width: 78px; }
+.comparison-grid, .pilot-results { gap: 0; margin: 22px 0; border-block: 1px solid #dfe4ee; }
+.comparison-grid article, .pilot-results article { min-height: 128px; padding: 20px 24px; border: 0; border-right: 1px solid #dfe4ee; border-radius: 0; background: transparent; }
+.comparison-grid article:last-child, .pilot-results article:last-child { border-right: 0; }
+.comparison-grid article.proposed { color: #0a003c; background: #f0f3ff; }
+.comparison-grid article.proposed span, .comparison-grid article.proposed small { color: #52607a; }
+.per-thousand { gap: 0; margin-top: 22px; border-block: 1px solid #dfe4ee; }
+.per-thousand article { padding: 18px 24px; border: 0; border-right: 1px solid #dfe4ee; border-radius: 0; background: transparent; }
+.per-thousand article:last-child { border-right: 0; }
+.decision-summary { margin-top: 28px; padding: 0 0 0 20px; border: 0; border-left: 4px solid #ff762f; border-radius: 0; background: transparent; }
+.recorded-volume { padding: 14px 0; border-width: 1px 0; border-radius: 0; background: transparent; }
+.adoption-scenarios { gap: 0; border-block: 1px solid #dfe4ee; }
+.adoption-scenarios article { padding: 24px; border: 0; border-right: 1px solid #dfe4ee; border-radius: 0; background: transparent; }
+.adoption-scenarios article:last-child { border-right: 0; }
+.adoption-scenarios .active-scenario { border-color: #dfe4ee; box-shadow: inset 4px 0 #ff762f; background: #fff7f2; }
+.feature-case { max-width: none; }
+
+@media (max-width: 800px) {
+  main { padding: 0 20px 58px; }
+  .app-header { margin-inline: 0; padding: 32px 20px; border-radius: 0; }
+  .step-card, .feature-case { padding: 30px 0; border-radius: 0; }
+  .comparison-grid, .pilot-results, .per-thousand, .adoption-scenarios { border-top: 1px solid #dfe4ee; }
+  .comparison-grid article, .pilot-results article, .per-thousand article, .adoption-scenarios article { min-height: 0; padding: 18px 0; border-right: 0; border-bottom: 1px solid #dfe4ee; }
+  .comparison-grid article:last-child, .pilot-results article:last-child, .per-thousand article:last-child, .adoption-scenarios article:last-child { border-bottom: 0; }
+}
