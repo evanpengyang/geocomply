@@ -139,6 +139,7 @@ def create_proposal(database_path: Path, scenario_id: str) -> dict[str, Any]:
         "sources": [dict(row) for row in source_rows],
         "baseline": baseline,
         "comparison": comparison,
+        "weighted_first_vendor_ranking": scenario["payload"].get("weighted_first_vendor_ranking"),
         "proposed_change": proposed_change,
         "assumptions": {
             "classification": "User assumption",
@@ -255,6 +256,23 @@ def printable_proposal_html(proposal: dict[str, Any]) -> str:
     """Render an offline, complete, print-safe representation of a frozen proposal."""
     scenario = proposal["scenario"]
     comparison = proposal["comparison"]
+    ranking = proposal.get("weighted_first_vendor_ranking")
+    ranking_section = ""
+    if isinstance(ranking, dict):
+        priorities = ranking.get("priorities", {})
+        normalized = ranking.get("normalized_priorities", {})
+        rows = "".join(
+            f"<li>{html.escape(str(item.get('vendor_name', item.get('vendor_id', 'Vendor'))))} "
+            f"({html.escape(str(item.get('vendor_id', '')))}): score {html.escape(str(item.get('score', 'Not available')))}</li>"
+            for item in ranking.get("ranked_vendors", []) if isinstance(item, dict)
+        ) or "<li>No eligible vendor ranking was available.</li>"
+        winners = ", ".join(html.escape(str(item)) for item in ranking.get("recommended_vendor_ids", [])) or "No winner selected"
+        ranking_section = f"""
+<section class="card keep"><h2>Weighted First-Vendor Ranking <span class="tag">User priorities + observed calibration</span></h2>
+<p><b>Selected priorities (0–5):</b> Cost {html.escape(str(priorities.get('cost', 'Not available')))}, Match {html.escape(str(priorities.get('match', 'Not available')))}, Timeout {html.escape(str(priorities.get('timeout', 'Not available')))}.</p>
+<p><b>Normalized weights:</b> Cost {html.escape(str(normalized.get('cost', 'Not available')))}, Match {html.escape(str(normalized.get('match', 'Not available')))}, Timeout {html.escape(str(normalized.get('timeout', 'Not available')))}.</p>
+<p><b>Recommended first-vendor pilot:</b> {winners}</p><ul>{rows}</ul>
+<p>{html.escape(str(ranking.get('note', 'This ranking is separate from pair-swap economics.')))}</p></section>"""
     if comparison["status"] == "available":
         model = comparison["model"]
         economics_data = comparison["pilot_economics"]
@@ -314,6 +332,7 @@ def printable_proposal_html(proposal: dict[str, Any]) -> str:
 <body><p class="tag">IDComply decision workbench · frozen proposal</p><h1>{html.escape(scenario['name'])}</h1>
 <p><b>Customer:</b> {html.escape(scenario['customer'])}<br><b>Scope:</b> {html.escape(scenario['scope_from'])} to {html.escape(scenario['scope_to'])}<br><b>Model version:</b> {html.escape(proposal['proposal_version'])}<br><b>Generated:</b> {html.escape(proposal['generated_at'])}</p>
 <section class="card"><h2>Proposed test</h2><p>{html.escape(proposal['proposed_change']['change'])}</p></section>
+{ranking_section}
 {comparison_section}
 <section class="keep"><h2>Assumptions and limitations</h2><ul>{''.join(f'<li>{html.escape(item)}</li>' for item in proposal['assumptions']['comparison_assumptions'])}</ul></section>
 <section class="keep"><h2>Before implementation <span class="tag">To agree with owner</span></h2><ul>{before_items}</ul><p><b>Owner notes:</b></p><ul>{note_items}</ul></section>

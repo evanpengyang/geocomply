@@ -19,6 +19,7 @@ from .business_case import BusinessCaseInputError, CustomerBusinessInputs, custo
 from .proposals import ProposalInputError, create_proposal, get_proposal, get_scenario, printable_proposal_html, save_scenario
 from .opportunities import list_opportunities
 from .database import connect, initialize
+from .vendor_recommendation import RecommendationInputError, recommend_first_vendor
 
 
 DATABASE_PATH = Path(__file__).resolve().parent.parent / "data" / "idcomply.sqlite"
@@ -123,6 +124,24 @@ def calibration(
 @app.get("/opportunities")
 def opportunities() -> dict[str, object]:
     return list_opportunities(DATABASE_PATH)
+
+
+@app.get("/vendor-recommendation")
+def vendor_recommendation(
+    customer: Annotated[str, Query(min_length=1)],
+    from_date: Annotated[str, Query(alias="from")],
+    to_date: Annotated[str, Query(alias="to")],
+    cost_priority: Annotated[Decimal, Query(ge=0, le=5)] = Decimal("3"),
+    match_priority: Annotated[Decimal, Query(ge=0, le=5)] = Decimal("3"),
+    timeout_priority: Annotated[Decimal, Query(ge=0, le=5)] = Decimal("3"),
+) -> dict[str, object]:
+    try:
+        return recommend_first_vendor(
+            DATABASE_PATH, customer, from_date, to_date,
+            cost_priority, match_priority, timeout_priority,
+        )
+    except RecommendationInputError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
 
 
 @app.post("/compare-pair")

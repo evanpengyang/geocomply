@@ -41,7 +41,8 @@ class ProposalTests(unittest.TestCase):
     def test_frozen_proposal_has_sources_and_printable_html(self) -> None:
         scenario = save_scenario(
             self.database, "Example proposal", "pair_comparison", "Example Play",
-            "2026-02-02", "2026-02-02", {"projected_eligible_entrants": 1000, "volume_mode": "recorded", "implementation_cost_usd": 20},
+            "2026-02-02", "2026-02-02", {"projected_eligible_entrants": 1000, "volume_mode": "recorded", "implementation_cost_usd": 20,
+            "weighted_first_vendor_ranking": {"priorities": {"cost": 3, "match": 3, "timeout": 3}, "recommended_vendor_ids": ["V02"], "ranked_vendors": [], "note": "Separate from pair-swap economics."}},
         )
         created = create_proposal(self.database, scenario["id"])
         proposal = get_proposal(self.database, created["id"])
@@ -50,6 +51,7 @@ class ProposalTests(unittest.TestCase):
         self.assertEqual(proposal["assumptions"]["projected_eligible_entrants"], 1000)
         self.assertEqual(proposal["assumptions"]["implementation_cost_usd"], "20.00")
         self.assertEqual(proposal["assumptions"]["volume_mode"], "recorded")
+        self.assertEqual(proposal["weighted_first_vendor_ranking"]["recommended_vendor_ids"], ["V02"])
         self.assertEqual(len(proposal["sources"]), 3)
         self.assertIn("SHA-256", rendered)
         self.assertIn("Pair-cost formula", rendered)
@@ -76,6 +78,13 @@ class ProposalTests(unittest.TestCase):
             "scenario": {"name": "Available proposal", "customer": "Example Play", "scope_from": "2026-02-02", "scope_to": "2026-02-02"},
             "proposal_version": "test", "generated_at": "2026-02-02T00:00:00+00:00", "comparison": comparison,
             "proposed_change": {"change": "Swap the first two recorded identity registries for a controlled test."},
+            "weighted_first_vendor_ranking": {
+                "priorities": {"cost": 3, "match": 3, "timeout": 3},
+                "normalized_priorities": {"cost": "33.33%", "match": "33.33%", "timeout": "33.33%"},
+                "recommended_vendor_ids": ["V03"],
+                "ranked_vendors": [{"vendor_id": "V03", "vendor_name": "Meridian", "score": "85.000000"}],
+                "note": "This first-vendor ranking is separate from the pair-swap economics and does not model waterfall savings.",
+            },
             "assumptions": {"projected_eligible_entrants": 1000, "implementation_cost_usd": "20.00", "comparison_assumptions": ["Prices are linear."]},
             "unknowns": ["Billing requires validation."], "pilot_success_conditions": ["Guardrails agreed."], "sources": [],
         }
@@ -84,6 +93,8 @@ class ProposalTests(unittest.TestCase):
         self.assertIn("weekly-chart", rendered)
         self.assertIn("Decision summary", rendered)
         self.assertIn("Northstar", rendered)
+        self.assertIn("Weighted First-Vendor Ranking", rendered)
+        self.assertIn("Meridian", rendered)
 
 
 if __name__ == "__main__":
